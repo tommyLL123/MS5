@@ -2,6 +2,7 @@ import os
 import time
 from typing import Optional
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.middleware.cors import CORSMiddleware
 import boto3
 from botocore.exceptions import BotoCoreError, ClientError
 
@@ -9,6 +10,18 @@ app = FastAPI(
     title="Microservicio 5 - Consultas Analíticas (AWS Athena)",
     description="API REST que ejecuta consultas SQL sobre el Catálogo de Datos de AWS Glue mediante AWS Athena.",
     version="1.0.0"
+)
+ALLOWED_ORIGINS = os.getenv(
+    "ALLOWED_ORIGINS",
+    "http://localhost:5173"
+).split(",")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ALLOWED_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Configuración por variables de entorno
