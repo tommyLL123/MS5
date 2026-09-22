@@ -26,8 +26,8 @@ app.add_middleware(
 
 # Configuración por variables de entorno
 AWS_REGION = os.getenv("AWS_REGION", "us-east-1")
-ATHENA_DATABASE = os.getenv("ATHENA_DATABASE", "db_glue_catalog")
-ATHENA_S3_OUTPUT = os.getenv("ATHENA_S3_OUTPUT", "s3://proyecto-bucket-g5/athena-results/")
+ATHENA_DATABASE = os.getenv("ATHENA_DATABASE", "restaurante")
+ATHENA_S3_OUTPUT = os.getenv("ATHENA_S3_OUTPUT", "s3://proyecto-cloud-bucket-g5/resultados_MS5/")
 
 # Cliente de Athena con boto3
 athena_client = boto3.client('athena', region_name=AWS_REGION)
